@@ -402,16 +402,9 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                                     <th class="py-1 font-normal w-16">Time</th>
                                     <th class="py-1 font-normal w-24">Participants</th>
                                 </tr>
-                                <tr class="border-b border-gray-800/50">
-                                    <td class="py-1.5 text-gray-200">Daily ITOps</td>
-                                    <td class="py-1.5 text-matrix font-mono">09:30 BRT</td>
-                                    <td class="py-1.5 text-gray-400 flex items-center gap-1"><img src="https://ui-avatars.com/api/?name=Team&background=003B10&color=00FF41&size=16" class="rounded-full"> Squad</td>
-                                </tr>
-                                <tr>
-                                    <td class="py-1.5 text-gray-200">JOCA Alinhamento</td>
-                                    <td class="py-1.5 text-matrix font-mono">14:00 BRT</td>
-                                    <td class="py-1.5 text-gray-400 flex items-center gap-1"><img src="https://ui-avatars.com/api/?name=B&background=00E5FF&color=000&size=16" class="rounded-full"> Bárbara</td>
-                                </tr>
+                                <tbody id="meetings-today">
+                                <!-- Dynamic meetings will be rendered here -->
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -476,55 +469,8 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                                     <th class="pb-2 font-normal w-2/4">Progresso Automático</th>
                                 </tr>
                             </thead>
-                            <tbody class="space-y-2">
-                                <tr class="group">
-                                    <td class="py-1.5 flex items-center gap-2 text-gray-200"><i class="ph-fill ph-rocket-launch text-lg text-purple-400"></i> JOCA</td>
-                                    <td class="py-1.5 text-matrix font-mono">ativo</td>
-                                    <td class="py-1.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-full bg-gray-900 h-1.5 rounded overflow-hidden border border-gray-800">
-                                                <div class="bg-matrix h-full w-[85%] shadow-neon-matrix"></div>
-                                            </div>
-                                            <span class="text-[10px] text-matrix font-mono">85%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-1.5 flex items-center gap-2 text-gray-200"><i class="ph-fill ph-gear-six text-lg text-gray-400"></i> ONIX</td>
-                                    <td class="py-1.5 text-jarvis font-mono">em produção</td>
-                                    <td class="py-1.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-full bg-gray-900 h-1.5 rounded overflow-hidden border border-gray-800">
-                                                <div class="bg-jarvis h-full w-[100%] shadow-neon-jarvis"></div>
-                                            </div>
-                                            <span class="text-[10px] text-jarvis font-mono">100%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-1.5 flex items-center gap-2 text-gray-200"><i class="ph-fill ph-snowflake text-lg text-blue-400"></i> ServiceNow</td>
-                                    <td class="py-1.5 text-jarvis font-mono">em produção</td>
-                                    <td class="py-1.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-full bg-gray-900 h-1.5 rounded overflow-hidden border border-gray-800">
-                                                <div class="bg-jarvis h-full w-[95%]"></div>
-                                            </div>
-                                            <span class="text-[10px] text-jarvis font-mono">95%</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="py-1.5 flex items-center gap-2 text-gray-200"><i class="ph-fill ph-slack-logo text-lg text-red-400"></i> Slack-Bot</td>
-                                    <td class="py-1.5 text-matrix font-mono">ativo</td>
-                                    <td class="py-1.5">
-                                        <div class="flex items-center gap-3">
-                                            <div class="w-full bg-gray-900 h-1.5 rounded overflow-hidden border border-gray-800">
-                                                <div class="bg-matrix h-full w-[40%]"></div>
-                                            </div>
-                                            <span class="text-[10px] text-matrix font-mono">40%</span>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id="projects-list" class="space-y-2">
+                                <!-- Projects injected dynamically via postMessage -->
                             </tbody>
                         </table>
                     </div>
@@ -604,24 +550,24 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                         <div class="w-1/4 flex flex-col gap-2 justify-center border-r border-gray-800/50 pr-2">
                             <div class="flex justify-between items-center bg-[#003B10]/30 border border-matrix/30 px-2 py-1.5 rounded">
                                 <span class="flex items-center gap-1.5 text-gray-300 font-sans text-[10px]"><i class="ph-fill ph-robot text-matrix text-lg"></i> ToqanClaw</span>
-                                <span class="text-matrix font-mono text-[8px] shadow-[0_0_5px_#00FF41]">ONLINE</span>
+                                <span id="agents-toqan-status" class="text-matrix font-mono text-[8px] shadow-[0_0_5px_#00FF41]">ONLINE</span>
                             </div>
                             <div class="flex justify-between items-center bg-[#008F11]/10 border border-jarvis/30 px-2 py-1.5 rounded">
                                 <span class="flex items-center gap-1.5 text-gray-300 font-sans text-[10px]"><i class="ph-fill ph-sparkle text-jarvis text-lg"></i> Gemini</span>
-                                <span class="text-matrix font-mono text-[8px]">ONLINE</span>
+                                <span id="agents-gemini-status" class="text-matrix font-mono text-[8px]">ONLINE</span>
                             </div>
                         </div>
                         <!-- Memory Logs -->
                         <div class="flex-1 flex flex-col justify-center border-r border-gray-800/50 pr-2">
                             <span class="text-[9px] font-mono text-gray-500 mb-1.5 tracking-wide">LOGS DE MEMÓRIA (Real-time)</span>
-                            <ul class="text-[10px] font-mono space-y-1 text-gray-400">
+                            <ul id="agents-memory-logs" class="text-[10px] font-mono space-y-1 text-gray-400">
                                 <li class="flex items-start gap-1.5"><span class="text-matrix mt-0.5">›</span> <span class="truncate">Analised JSM handoff payload structure (Toqan)</span></li>
                                 <li class="flex items-start gap-1.5"><span class="text-matrix mt-0.5">›</span> <span class="truncate">Refactored Module_Jira for v2 API (Gemini)</span></li>
                                 <li class="flex items-start gap-1.5"><span class="text-jarvis mt-0.5 animate-pulse">_</span> <span class="truncate text-gray-500">Aguardando nova instrução...</span></li>
                             </ul>
                         </div>
                         <!-- Sync Terminal -->
-                        <div class="w-1/4 flex flex-col justify-center font-mono text-[8px] text-gray-400 bg-black/60 p-2 rounded border border-gray-900 shadow-inner">
+                        <div id="agents-sync-terminal" class="w-1/4 flex flex-col justify-center font-mono text-[8px] text-gray-400 bg-black/60 p-2 rounded border border-gray-900 shadow-inner">
                             <div class="flex justify-between mb-1">
                                 <span class="text-jarvis">> sync_push.py</span>
                                 <span class="text-gray-600">2ms</span>
@@ -757,8 +703,8 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
             <div class="flex justify-between items-center bg-panelBg border border-panelBorder p-3 rounded shrink-0 shadow-panel-glow">
                 <h2 class="text-matrix font-mono font-bold tracking-widest text-lg flex items-center gap-2"><i class="ph-fill ph-kanban text-jarvis"></i> ENGENHARIA: PROJETOS & MÓDULOS LEGO</h2>
                 <div class="flex gap-2">
-                    <span data-stat="totalProjects" class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-[10px] font-mono border border-gray-600">Total Projetos: 116</span>
-                    <span class="bg-matrix/10 text-matrix border border-matrix px-2 py-1 rounded text-[10px] font-mono shadow-neon-matrix">Módulos Catalogados: 31</span>
+                    <span class="bg-gray-800 text-gray-300 px-2 py-1 rounded text-[10px] font-mono border border-gray-600">Total Projetos: <span data-stat="totalProjects">0</span></span>
+                    <span class="bg-matrix/10 text-matrix border border-matrix px-2 py-1 rounded text-[10px] font-mono shadow-neon-matrix">Módulos Catalogados: <span data-stat="modulesCount">0</span></span>
                 </div>
             </div>
             
@@ -857,7 +803,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 <div class="flex-1 panel p-3 flex items-center justify-between">
                     <div>
                         <span class="text-gray-500 font-mono text-[9px] uppercase">Incidentes Ativos (P1/P2)</span>
-                        <div class="text-2xl font-mono text-matrix font-bold shadow-neon-matrix mt-1">0</div>
+                        <div data-stat="jiraActive" class="text-2xl font-mono text-matrix font-bold shadow-neon-matrix mt-1">0</div>
                     </div>
                     <i class="ph-fill ph-check-circle text-4xl text-matrix opacity-20"></i>
                 </div>
@@ -871,7 +817,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 <div class="flex-1 panel p-3 flex items-center justify-between border-alert/30">
                     <div>
                         <span class="text-gray-500 font-mono text-[9px] uppercase">RITMs Atrasadas</span>
-                        <div class="text-2xl font-mono text-alert font-bold shadow-neon-alert mt-1">3</div>
+                        <div data-stat="jiraBlocked" class="text-2xl font-mono text-alert font-bold shadow-neon-alert mt-1">3</div>
                     </div>
                     <i class="ph-fill ph-warning text-4xl text-alert opacity-20"></i>
                 </div>
@@ -894,36 +840,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                                 <th class="px-4 py-2 font-normal w-24 text-right">Atualizado</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-gray-800/50">
-                            <tr class="hover:bg-white/5 transition-colors cursor-pointer group">
-                                <td class="px-4 py-2.5 text-jarvis font-mono group-hover:underline">ITOPS-1480</td>
-                                <td class="px-4 py-2.5 text-gray-200">S26 - Deixar de usar AD On-Premises nos escritórios</td>
-                                <td class="px-4 py-2.5"><span class="bg-matrix/10 text-matrix border border-matrix/50 px-2 py-0.5 rounded text-[9px] font-mono">Concluído</span></td>
-                                <td class="px-4 py-2.5 text-center text-matrix">🔽</td>
-                                <td class="px-4 py-2.5 text-gray-500 text-right font-mono text-[9px]">Hoje</td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors cursor-pointer group bg-alert/5">
-                                <td class="px-4 py-2.5 text-jarvis font-mono group-hover:underline">ITOPS-1592</td>
-                                <td class="px-4 py-2.5 text-gray-200">Revisão de Permissões JSM / ServiceNow</td>
-                                <td class="px-4 py-2.5"><span class="bg-alert/10 text-alert border border-alert/50 px-2 py-0.5 rounded text-[9px] font-mono">Blocked (7d)</span></td>
-                                <td class="px-4 py-2.5 text-center text-alert">🔼</td>
-                                <td class="px-4 py-2.5 text-gray-500 text-right font-mono text-[9px]">Ontem</td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors cursor-pointer group">
-                                <td class="px-4 py-2.5 text-jarvis font-mono group-hover:underline">ITOPS-1601</td>
-                                <td class="px-4 py-2.5 text-gray-200">Deploy Toqan Proxy v2</td>
-                                <td class="px-4 py-2.5"><span class="bg-gray-800 text-gray-300 border border-gray-600 px-2 py-0.5 rounded text-[9px] font-mono">Em Andamento</span></td>
-                                <td class="px-4 py-2.5 text-center text-yellow-500">🔼</td>
-                                <td class="px-4 py-2.5 text-gray-500 text-right font-mono text-[9px]">Ontem</td>
-                            </tr>
-                            <tr class="hover:bg-white/5 transition-colors cursor-pointer group opacity-60">
-                                <td class="px-4 py-2.5 text-gray-500 font-mono">ITOPS-1300</td>
-                                <td class="px-4 py-2.5 text-gray-400">Limpeza de Grupos Google Antigos</td>
-                                <td class="px-4 py-2.5"><span class="bg-transparent text-gray-500 border border-gray-700 px-2 py-0.5 rounded text-[9px] font-mono">Backlog</span></td>
-                                <td class="px-4 py-2.5 text-center text-gray-600">🔽</td>
-                                <td class="px-4 py-2.5 text-gray-600 text-right font-mono text-[9px]">12 Jul</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="jira-list" class="divide-y divide-gray-800/50"></tbody>
                     </table>
                 </div>
             </div>
@@ -938,18 +855,18 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 <div class="w-1/3 panel p-3 flex flex-col justify-center relative overflow-hidden group">
                     <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition"><i class="ph-fill ph-amazon-logo text-9xl text-yellow-500"></i></div>
                     <span class="text-gray-500 font-mono text-[9px] uppercase tracking-wide relative z-10">AWS Mês Atual</span>
-                    <div class="text-2xl font-mono text-yellow-500 font-bold mt-1 relative z-10">$ 3,536<span class="text-xs text-gray-500 font-normal">.00</span></div>
+                    <div class="text-2xl font-mono text-yellow-500 font-bold mt-1 relative z-10" id="finops-aws-cost">$ 3,536<span class="text-xs text-gray-500 font-normal">.00</span></div>
                     <span class="text-[9px] text-matrix font-mono mt-1 relative z-10">▼ 4.2% vs Mês Anterior (Meta: -10%)</span>
                 </div>
                 <div class="w-1/3 panel p-3 flex flex-col justify-center relative overflow-hidden group">
                     <div class="absolute right-[-20px] top-[-20px] opacity-10 group-hover:opacity-20 transition"><i class="ph-fill ph-google-logo text-9xl text-jarvis"></i></div>
                     <span class="text-gray-500 font-mono text-[9px] uppercase tracking-wide relative z-10">GCP Mês Atual</span>
-                    <div class="text-2xl font-mono text-jarvis font-bold shadow-neon-jarvis mt-1 relative z-10">$ 33<span class="text-xs text-gray-500 font-normal shadow-none">.37</span></div>
+                    <div id="finops-gcp-cost" class="text-2xl font-mono text-jarvis font-bold shadow-neon-jarvis mt-1 relative z-10">$ 33<span class="text-xs text-gray-500 font-normal shadow-none">.37</span></div>
                     <span class="text-[9px] text-gray-400 font-mono mt-1 relative z-10">Estável (Uso Gemini/Vertex)</span>
                 </div>
                 <div class="w-1/3 panel p-3 flex flex-col justify-center border-matrix/30">
                     <span class="text-gray-500 font-mono text-[9px] uppercase tracking-wide">Renovações Próximas (30d)</span>
-                    <div class="text-2xl font-sans text-gray-200 font-bold mt-1">1 <span class="text-sm font-mono text-gray-500 font-normal">Contrato</span></div>
+                    <div id="finops-renewals-count" class="text-2xl font-sans text-gray-200 font-bold mt-1">1 <span class="text-sm font-mono text-gray-500 font-normal">Contrato</span></div>
                     <span class="text-[9px] text-alert font-mono mt-1">Atenção: Licença Senior ERP</span>
                 </div>
             </div>
@@ -974,7 +891,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                                     <th class="px-3 py-2 font-normal w-20 text-right">Status</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-gray-800/50">
+                            <tbody id="finops-contracts-body" class="divide-y divide-gray-800/50">
                                 <tr class="hover:bg-white/5">
                                     <td class="px-3 py-2.5 font-bold text-gray-300">Niuco</td>
                                     <td class="px-3 py-2.5 text-gray-400">Assessoria AWS / FinOps</td>
@@ -1011,70 +928,8 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 </button>
             </div>
             
-            <div class="grid grid-cols-4 gap-4 overflow-y-auto custom-scrollbar flex-1 pb-4 items-start">
-                <!-- Learning Card: Consumindo -->
-                <div class="bg-panelBg border border-matrix/30 rounded flex flex-col overflow-hidden shadow-neon-matrix group">
-                    <div class="h-24 bg-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <i class="ph-fill ph-youtube-logo text-5xl text-gray-800 group-hover:text-red-500/50 transition"></i>
-                        <span class="absolute top-2 right-2 bg-matrix/20 border border-matrix text-matrix text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1 shadow-neon-matrix"><i class="ph-bold ph-spinner animate-spin"></i> Consumindo</span>
-                    </div>
-                    <div class="p-3">
-                        <h4 class="text-gray-200 font-bold text-[12px] leading-tight mb-1">Obsidian Dataview Advanced Masterclass</h4>
-                        <p class="text-gray-500 text-[10px] mb-3 line-clamp-2">Como usar JavaScript inline (dataviewjs) para gerar gráficos Mermaid dinâmicos.</p>
-                        <div class="flex justify-between items-center font-mono text-[9px]">
-                            <span class="text-gray-600">YouTube</span>
-                            <span class="text-purple-400">#obsidian</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Learning Card: Pendente -->
-                <div class="bg-panelBg border border-gray-800 rounded flex flex-col overflow-hidden hover:border-gray-600 transition">
-                    <div class="h-24 bg-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <i class="ph-fill ph-article text-5xl text-gray-800"></i>
-                        <span class="absolute top-2 right-2 bg-gray-800 border border-gray-600 text-gray-400 text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"><i class="ph-fill ph-hourglass-high"></i> Pendente</span>
-                    </div>
-                    <div class="p-3">
-                        <h4 class="text-gray-200 font-bold text-[12px] leading-tight mb-1">ServiceNow API Secrets & Rate Limits</h4>
-                        <p class="text-gray-500 text-[10px] mb-3 line-clamp-2">Documentação não oficial sobre otimização de payloads em massa.</p>
-                        <div class="flex justify-between items-center font-mono text-[9px]">
-                            <span class="text-gray-600">Artigo</span>
-                            <span class="text-blue-400">#snow</span>
-                        </div>
-                    </div>
-                </div>
-
-                 <!-- Learning Card: Pendente -->
-                 <div class="bg-panelBg border border-gray-800 rounded flex flex-col overflow-hidden hover:border-gray-600 transition">
-                    <div class="h-24 bg-gray-900 relative overflow-hidden flex items-center justify-center">
-                        <i class="ph-fill ph-brain text-5xl text-gray-800"></i>
-                        <span class="absolute top-2 right-2 bg-gray-800 border border-gray-600 text-gray-400 text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"><i class="ph-fill ph-hourglass-high"></i> Pendente</span>
-                    </div>
-                    <div class="p-3">
-                        <h4 class="text-gray-200 font-bold text-[12px] leading-tight mb-1">CrewAI Framework: Multi-Agent Systems</h4>
-                        <p class="text-gray-500 text-[10px] mb-3 line-clamp-2">Construindo arquiteturas onde agentes debatem antes de responder.</p>
-                        <div class="flex justify-between items-center font-mono text-[9px]">
-                            <span class="text-gray-600">GitHub</span>
-                            <span class="text-matrix">#ai-agents</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Learning Card: Consumido -->
-                <div class="bg-panelBg border border-gray-800/50 opacity-60 rounded flex flex-col overflow-hidden">
-                    <div class="h-24 bg-gray-900/50 relative overflow-hidden flex items-center justify-center">
-                        <i class="ph-fill ph-youtube-logo text-5xl text-gray-800/50"></i>
-                        <span class="absolute top-2 right-2 bg-gray-900 text-gray-600 border border-gray-700 text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"><i class="ph-bold ph-check"></i> Arquivado</span>
-                    </div>
-                    <div class="p-3">
-                        <h4 class="text-gray-500 line-through font-bold text-[12px] leading-tight mb-1">GCP Vertex AI SDK Python</h4>
-                        <p class="text-gray-600 text-[10px] mb-3 line-clamp-2">Intro básica. Já extraído para o modelo mental.</p>
-                        <div class="flex justify-between items-center font-mono text-[9px]">
-                            <span class="text-gray-600">YouTube</span>
-                            <span class="text-gray-600">#gcp</span>
-                        </div>
-                    </div>
-                </div>
+            <div id="learning-grid" class="grid grid-cols-4 gap-4 overflow-y-auto custom-scrollbar flex-1 pb-4 items-start">
+                <!-- Dynamic learning cards will be rendered here -->
             </div>
         </section>
 
@@ -1306,11 +1161,13 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
         }
         setInterval(updateClock, 1000);
         updateClock(); // Init immediately
-    </script>
         // --- 4. Vault Stats Receiver (postMessage) ---
+        console.log('[Pirata Dashboard] Receiver ready, waiting for vault-stats...');
         window.addEventListener('message', (event) => {
+          console.log('[Pirata Dashboard] Received message:', event.data);
           if (event.data && event.data.type === 'vault-stats') {
             var stats = event.data.data;
+            console.log('[Pirata Dashboard] Updating stats:', stats);
             document.querySelectorAll('[data-stat]').forEach(function(el) {
               var key = el.getAttribute('data-stat');
               if (stats[key] !== undefined) {
@@ -1322,9 +1179,195 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 el.textContent = stats.jiraCount + ' cards espelhados';
               }
             });
+            // --- Render active projects dynamically ---
+            if (stats.projects && stats.projects.length > 0) {
+              var listEl = document.getElementById('projects-list');
+              if (listEl) {
+                listEl.innerHTML = stats.projects.map(function(p) {
+                  var statusColor = p.status === 'ativo' ? 'text-matrix' : 'text-jarvis';
+                  var progressBarColor = p.progress >= 80 ? 'bg-matrix shadow-neon-matrix' : p.progress >= 50 ? 'bg-jarvis' : 'bg-yellow-500';
+                  return '<tr data-file-path="' + p.path + '" class="cursor-pointer hover:bg-white/5">' +
+                    '<td class="py-1.5 flex items-center gap-2 text-gray-200"><i class="ph-fill ph-rocket-launch text-lg text-purple-400"></i> ' + p.name + '</td>' +
+                    '<td class="py-1.5 ' + statusColor + ' font-mono">' + p.status + '</td>' +
+                    '<td class="py-1.5"><div class="flex items-center gap-3">' +
+                    '<div class="w-full bg-gray-900 h-1.5 rounded overflow-hidden border border-gray-800">' +
+                    '<div class="' + progressBarColor + ' h-full" style="width:' + p.progress + '%"></div></div>' +
+                    '<span class="text-[10px] ' + statusColor + ' font-mono">' + p.progress + '%</span></div></td></tr>';
+                }).join('');
+              }
+            }
+            // --- Render Jira cards dynamically ---
+            if (stats.jiraCards && stats.jiraCards.length > 0) {
+              var jiraEl = document.getElementById('jira-list');
+              if (jiraEl) {
+                jiraEl.innerHTML = stats.jiraCards.map(function(c) {
+                  var statusColor = 'text-matrix';
+                  var statusBg = 'bg-matrix/10 border-matrix/50';
+                  if (c.status.toLowerCase().includes('block')) { statusColor = 'text-alert'; statusBg = 'bg-alert/10 border-alert/50'; }
+                  else if (c.status.toLowerCase().includes('progress') || c.status.toLowerCase().includes('prod')) { statusColor = 'text-jarvis'; statusBg = 'bg-jarvis/10 border-jarvis/50'; }
+                  var priColor = c.priority.includes('🔼') ? 'text-alert' : c.priority.includes('🔽') ? 'text-matrix' : 'text-yellow-500';
+                  var ago = Math.round((Date.now() - c.updated) / 3600000) + 'h';
+                  return '<tr data-file-path="' + c.path + '" class="hover:bg-white/5 transition-colors cursor-pointer group">' +
+                    '<td class="px-4 py-2.5 text-jarvis font-mono group-hover:underline">' + c.key + '</td>' +
+                    '<td class="px-4 py-2.5 text-gray-200">' + c.summary + '</td>' +
+                    '<td class="px-4 py-2.5"><span class="' + statusBg + ' ' + statusColor + ' border px-2 py-0.5 rounded text-[9px] font-mono">' + c.status + '</span></td>' +
+                    '<td class="px-4 py-2.5 text-center ' + priColor + '">' + (c.priority || '—') + '</td>' +
+                    '<td class="px-4 py-2.5 text-gray-500 text-right font-mono text-[9px]">' + ago + '</td></tr>';
+                }).join('');
+              }
+            }
+            // --- Render meetings dynamically ---
+            if (stats.todayMeetingsList && stats.todayMeetingsList.length > 0) {
+              var meetingsEl = document.getElementById('meetings-today');
+              if (meetingsEl) {
+                meetingsEl.innerHTML = stats.todayMeetingsList.map(function(m) {
+                  var timeDisplay = m.time ? m.time : '—';
+                  var participantsDisplay = m.participants && m.participants.length > 0 ? m.participants.slice(0, 3).map(function(p) {
+                    var name = typeof p === 'string' ? p : (p.name || 'Team');
+                    var initials = name.split(' ').map(function(n) { return n[0]; }).join('').substring(0, 2).toUpperCase();
+                    return '<img src="https://ui-avatars.com/api/?name=' + encodeURIComponent(initials) + '&background=003B10&color=00FF41&size=16" class="rounded-full">' + name;
+                  }).join(' ') : '<span class="text-gray-600">—</span>';
+                  return '<tr data-file-path="' + m.path + '" class="border-b border-gray-800/50 hover:bg-white/5 transition-colors cursor-pointer">' +
+                    '<td class="py-1.5 text-gray-200">' + m.name + '</td>' +
+                    '<td class="py-1.5 text-matrix font-mono">' + timeDisplay + '</td>' +
+                    '<td class="py-1.5 text-gray-400 flex items-center gap-1">' + participantsDisplay + '</td></tr>';
+                }).join('');
+              }
+            } else {
+              var meetingsEl = document.getElementById('meetings-today');
+              if (meetingsEl) {
+                meetingsEl.innerHTML = '<tr><td colspan="3" class="py-2 text-gray-600 text-center font-mono text-[10px]">Nenhuma reunião hoje</td></tr>';
+              }
+            }
+            // --- Render learning cards dynamically ---
+            var learningGrid = document.getElementById('learning-grid');
+            if (learningGrid && stats.learning) {
+              var allLearning = stats.learning;
+              var pendingCards = allLearning.filter(function(l) { return l.status === 'pendente' || l.status === 'consumindo'; }).slice(0, 8);
+              var consumedCards = allLearning.filter(function(l) { return l.status === 'consumido'; }).slice(0, 4);
+              var displayCards = pendingCards.concat(consumedCards);
+              if (displayCards.length === 0) {
+                learningGrid.innerHTML = '<div class="col-span-4 text-center text-gray-600 font-mono text-[11px] py-8">Nenhum conteúdo de aprendizado encontrado</div>';
+              } else {
+                learningGrid.innerHTML = displayCards.map(function(l) {
+                  var statusClass = l.status === 'consumindo' ? 'border-matrix/30 shadow-neon-matrix' : l.status === 'consumido' ? 'border-gray-800/50 opacity-60' : 'border-gray-800 hover:border-gray-600';
+                  var statusBadge = '';
+                  var iconClass = 'ph-article';
+                  if (l.status === 'consumindo') {
+                    statusBadge = '<span class="absolute top-2 right-2 bg-matrix/20 border border-matrix text-matrix text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1 shadow-neon-matrix"><i class="ph-bold ph-spinner animate-spin"></i> Consumindo</span>';
+                    iconClass = 'ph-youtube-logo text-red-500/50';
+                  } else if (l.status === 'consumido') {
+                    statusBadge = '<span class="absolute top-2 right-2 bg-gray-900 text-gray-600 border border-gray-700 text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"><i class="ph-bold ph-check"></i> Arquivado</span>';
+                    iconClass = 'ph-youtube-logo text-gray-800/50';
+                  } else {
+                    statusBadge = '<span class="absolute top-2 right-2 bg-gray-800 border border-gray-600 text-gray-400 text-[8px] font-mono px-1.5 py-0.5 rounded flex items-center gap-1"><i class="ph-fill ph-hourglass-high"></i> Pendente</span>';
+                    iconClass = 'ph-brain';
+                  }
+                  var sourceDisplay = l.source ? l.source.replace('https://', '').replace('http://', '').split('/')[0] : '—';
+                  var firstTag = l.tags && l.tags.length > 0 ? l.tags[0] : '';
+                  var resumoDisplay = l.resumo || '';
+                  return '<div data-file-path="' + l.path + '" class="bg-panelBg border ' + statusClass + ' rounded flex flex-col overflow-hidden transition cursor-pointer">' +
+                    '<div class="h-24 bg-gray-900 relative overflow-hidden flex items-center justify-center">' +
+                    '<i class="ph-fill ' + iconClass + ' text-5xl text-gray-800"></i>' +
+                    statusBadge +
+                    '</div>' +
+                    '<div class="p-3">' +
+                    '<h4 class="text-gray-200 font-bold text-[12px] leading-tight mb-1">' + l.name + '</h4>' +
+                    '<p class="text-gray-500 text-[10px] mb-3 line-clamp-2">' + resumoDisplay + '</p>' +
+                    '<div class="flex justify-between items-center font-mono text-[9px]">' +
+                    '<span class="text-gray-600">' + sourceDisplay + '</span>' +
+                    '<span class="text-purple-400">' + firstTag + '</span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+                }).join('');
+              }
+            }
+          
+            // --- Fase 2g: FinOps Data Receiver ---
+            if (stats.finopsData) {
+              var fd = stats.finopsData;
+              // Update AWS cost
+              var awsEl = document.getElementById('finops-aws-cost');
+              if (awsEl && fd.aws_cost !== null) {
+                awsEl.innerHTML = '$ ' + fd.aws_cost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+              }
+              if (awsEl && fd.isMockup) {
+                awsEl.innerHTML += ' <span class="text-[8px] text-alert ml-1">(mockup)</span>';
+              }
+              // Update GCP cost
+              var gcpEl = document.getElementById('finops-gcp-cost');
+              if (gcpEl && fd.gcp_cost !== null) {
+                gcpEl.innerHTML = '$ ' + fd.gcp_cost.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+              }
+              if (gcpEl && fd.isMockup) {
+                gcpEl.innerHTML += ' <span class="text-[8px] text-alert ml-1">(mockup)</span>';
+              }
+              // Update renewals count
+              var renewEl = document.getElementById('finops-renewals-count');
+              if (renewEl) {
+                var count = fd.contracts.length;
+                renewEl.innerHTML = count + ' <span class="text-sm font-mono text-gray-500 font-normal">Contrato' + (count !== 1 ? 's' : '') + '</span>';
+              }
+              // Update contracts table
+              var contractsEl = document.getElementById('finops-contracts-body');
+              if (contractsEl && fd.contracts.length > 0) {
+                contractsEl.innerHTML = fd.contracts.map(function(c) {
+                  var statusClass = c.status === 'Ativo' ? 'bg-matrix/10 text-matrix border-matrix/30' : c.status.includes('Re') ? 'bg-alert/10 text-alert border-alert/30' : 'bg-gray-800 text-gray-400 border-gray-700';
+                  return '<tr class="hover:bg-white/5">' +
+                    '<td class="px-3 py-2.5 font-bold text-gray-300">' + c.fornecedor + '</td>' +
+                    '<td class="px-3 py-2.5 text-gray-400">' + c.servico + '</td>' +
+                    '<td class="px-3 py-2.5 font-mono ' + (c.status.includes('Re') ? 'text-alert' : 'text-gray-400') + '">' + c.renovacao + '</td>' +
+                    '<td class="px-3 py-2.5 text-right"><span class="' + statusClass + ' border px-1.5 py-0.5 rounded text-[8px] font-mono">' + c.status + '</span></td>' +
+                    '</tr>';
+                }).join('');
+              }
+            }
+            // --- Fase 2h: Agents Hub Data Receiver ---
+            if (stats.agentsData) {
+              var ad = stats.agentsData;
+              // Update ToqanClaw status
+              var toqanEl = document.getElementById('agents-toqan-status');
+              if (toqanEl) {
+                toqanEl.textContent = ad.toqanClaw.status;
+                toqanEl.className = ad.toqanClaw.status === 'ONLINE' ? 'text-matrix font-mono text-[8px] shadow-[0_0_5px_#00FF41]' : 'text-alert font-mono text-[8px]';
+              }
+              // Update Gemini status
+              var geminiEl = document.getElementById('agents-gemini-status');
+              if (geminiEl) {
+                geminiEl.textContent = ad.gemini.status;
+                geminiEl.className = ad.gemini.status === 'ONLINE' ? 'text-matrix font-mono text-[8px]' : 'text-alert font-mono text-[8px]';
+              }
+              // Update memory logs
+              var logsEl = document.getElementById('agents-memory-logs');
+              if (logsEl) {
+                if (ad.memoryLogs && ad.memoryLogs.length > 0) {
+                  logsEl.innerHTML = ad.memoryLogs.map(function(log) {
+                    return '<li class="flex items-start gap-1.5"><span class="text-matrix mt-0.5">›</span> <span class="truncate">' + log + '</span></li>';
+                  }).join('');
+                } else if (ad.toqanClaw.lastLog) {
+                  logsEl.innerHTML = '<li class="flex items-start gap-1.5"><span class="text-matrix mt-0.5">›</span> <span class="truncate">' + ad.toqanClaw.lastLog + '</span></li>' +
+                    '<li class="flex items-start gap-1.5"><span class="text-jarvis mt-0.5 animate-pulse">_</span> <span class="truncate text-gray-500">Aguardando nova instrução...</span></li>';
+                }
+              }
+              // Update sync terminal
+              var syncEl = document.getElementById('agents-sync-terminal');
+              if (syncEl) {
+                var gcalActive = ad.gcalSync.active ? '<span class="text-matrix">gcal: ON</span>' : '<span class="text-gray-600">gcal: OFF</span>';
+                var gitActive = ad.gitSync.active ? '<span class="text-matrix">git: ON</span>' : '<span class="text-gray-600">git: OFF</span>';
+                syncEl.innerHTML = '<div class="flex justify-between mb-1"><span class="text-jarvis">> sync_push.py</span><span class="text-gray-600">2ms</span></div>' +
+                  '<div class="grid grid-cols-2 gap-x-2 gap-y-0.5 opacity-80">' + gcalActive + gitActive + '</div>';
+              }
+            }
+// --- Click delegation: open files in Obsidian ---
+        document.addEventListener('click', function(e) {
+          var target = e.target.closest('[data-file-path]');
+          if (target) {
+            var filePath = target.getAttribute('data-file-path');
+            window.parent.postMessage({ type: 'open-file', path: filePath }, '*');
           }
         });
-
+    </script>
 </body>
 </html>`;
 
@@ -1379,16 +1422,223 @@ class PirataDashboardView extends ItemView {
         }
       }
     }
-    return {
+    // Count modules in 02-Engenharia/Manuals/Modules/
+    var modulesCount = 0;
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i];
+      if (f.path.startsWith("02-Engenharia/Manuals/Modules/") || f.path.startsWith("02-Engenharia/Manuals/Modules")) {
+        modulesCount++;
+      }
+    }
+
+    // Collect Jira cards from Jira/ITOPS/ and compute counters
+    var jiraCards = [];
+    var jiraActive = 0;
+    var jiraBlocked = 0;
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (file.path.startsWith("Jira/ITOPS/")) {
+        var cache = this.app.metadataCache.getFileCache(file);
+        var status = cache && cache.frontmatter ? (cache.frontmatter.status || "") : "";
+        var summary = cache && cache.frontmatter ? (cache.frontmatter.summary || cache.frontmatter.title || file.basename) : file.basename;
+        var priority = cache && cache.frontmatter ? (cache.frontmatter.priority || "") : "";
+        jiraCards.push({
+          key: file.basename,
+          status: status,
+          summary: summary,
+          priority: priority,
+          updated: file.stat.mtime,
+          path: file.path
+        });
+        // Count active (not Done/Concluído/done)
+        if (status !== "Done" && status !== "Concluído" && status !== "done") {
+          jiraActive++;
+        }
+        // Count blocked
+        if (status.toLowerCase().includes("block")) {
+          jiraBlocked++;
+        }
+      }
+    }
+    // Sort by modification time descending, take top 15
+    jiraCards.sort((a, b) => b.updated - a.updated);
+    jiraCards = jiraCards.slice(0, 15);
+
+    // Collect top 5 active projects with progress based on tasks
+    var projects = [];
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (file.path.startsWith("02-Engenharia/Projetos") || file.path.startsWith("02-Engenharia/Projects")) {
+        var cache = this.app.metadataCache.getFileCache(file);
+        if (cache && (cache.frontmatter?.status === "ativo" || cache.frontmatter?.status === "active")) {
+          var openT = 0, doneT = 0;
+          if (cache.listItems) {
+            for (var j = 0; j < cache.listItems.length; j++) {
+              var item = cache.listItems[j];
+              if (item.task) {
+                if (item.task === "x" || item.task === "X") doneT++;
+                else openT++;
+              }
+            }
+          }
+          var progress = (openT + doneT) > 0 ? Math.round((doneT / (openT + doneT)) * 100) : 0;
+          projects.push({
+            name: file.basename,
+            status: cache.frontmatter?.status || "ativo",
+            progress: progress,
+            area: cache.frontmatter?.area || cache.frontmatter?.área || "",
+            tags: cache.frontmatter?.tags || [],
+            mtime: file.stat.mtime,
+            path: file.path
+          });
+        }
+      }
+    }
+    // Sort by modification time (most recent first) and take top 5
+    projects.sort((a, b) => b.mtime - a.mtime);
+    projects = projects.slice(0, 5);
+
+    // Collect meetings from 02-Engenharia/Meetings/
+    var meetings = [];
+    var today = new Date();
+    var todayKey = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+    var todayKey7 = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000).getDate()).padStart(2, '0');
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (file.path.startsWith("02-Engenharia/Meetings/")) {
+        var cache = this.app.metadataCache.getFileCache(file);
+        var date = cache && cache.frontmatter && cache.frontmatter.date;
+        if (date) {
+          var dateStr = String(date).substring(0, 10);
+          meetings.push({
+            name: file.basename,
+            date: dateStr,
+            time: cache.frontmatter.time || "",
+            participants: cache.frontmatter.participants || [],
+            isToday: dateStr === todayKey,
+            path: file.path
+          });
+        }
+      }
+    }
+    meetings.sort((a, b) => (a.time || "").localeCompare(b.time || ""));
+    var todayMeetingsList = meetings.filter(m => m.isToday).slice(0, 5);
+    var weekMeetings = meetings.filter(m => m.date >= todayKey && m.date <= todayKey7).slice(0, 10);
+
+    // Collect learning from 05-Aprendizado/
+    var learning = [];
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (file.path.startsWith("05-Aprendizado/")) {
+        var cache = this.app.metadataCache.getFileCache(file);
+        learning.push({
+          name: file.basename,
+          status: cache && cache.frontmatter ? (cache.frontmatter.status || "pendente") : "pendente",
+          resumo: cache && cache.frontmatter ? (cache.frontmatter.resumo || "") : "",
+          source: cache && cache.frontmatter ? (cache.frontmatter.fonte || cache.frontmatter.source || "") : "",
+          tags: cache && cache.frontmatter ? (cache.frontmatter.tags || []) : [],
+          path: file.path
+        });
+      }
+    }
+    var learningPendingList = learning.filter(l => l.status === "pendente" || l.status === "consumindo").slice(0, 8);
+    var learningConsumedList = learning.filter(l => l.status === "consumido").slice(0, 5);
+
+    
+    // ============================================================
+    // Fase 2g: FinOps Data - Read from vault notes
+    // ============================================================
+    var finopsData = {
+      aws_cost: null,
+      gcp_cost: null,
+      aws_variation: null,
+      isMockup: true,
+      contracts: []
+    };
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      var cache = this.app.metadataCache.getFileCache(file);
+      if (!cache) continue;
+      // Look for FinOps notes in 02-Engenharia/FinOps/ or with finops tag
+      var isFinOpsNote = file.path.startsWith("02-Engenharia/FinOps/") ||
+        (cache.tags && cache.tags.some(function(t) { return t.tag === "finops"; }));
+      if (isFinOpsNote && cache.frontmatter) {
+        var fm = cache.frontmatter;
+        if (fm.aws_cost !== undefined) finopsData.aws_cost = fm.aws_cost;
+        if (fm.gcp_cost !== undefined) finopsData.gcp_cost = fm.gcp_cost;
+        if (fm.aws_variation !== undefined) finopsData.aws_variation = fm.aws_variation;
+        // Collect contract data
+        if (fm.fornecedor || fm.servico || fm.renovacao || fm.status_contrato) {
+          finopsData.contracts.push({
+            fornecedor: fm.fornecedor || file.basename,
+            servico: fm.servico || "",
+            renovacao: fm.renovacao || "",
+            status: fm.status_contrato || fm.status || "Ativo",
+            valor: fm.contract_value || fm.valor || null,
+            path: file.path
+          });
+        }
+      }
+    }
+    // If no vault data found, keep defaults (mockup) - isMockup stays true
+
+    // ============================================================
+    // Fase 2h: Agents Hub Data - Read from vault structure
+    // ============================================================
+    var agentsData = {
+      toqanClaw: { status: "OFFLINE", lastLog: null },
+      gemini: { status: "OFFLINE", lastLog: null },
+      gcalSync: { active: false, lastSync: null },
+      gitSync: { active: false, lastSync: null },
+      memoryLogs: []
+    };
+    // Check gcal-obsidian-sync plugin - use getAbstractFileByPath to detect folder
+    try {
+      var gcalPluginFolder = this.app.vault.getAbstractFileByPath(".obsidian/plugins/gcal-obsidian-sync");
+      if (gcalPluginFolder) agentsData.gcalSync.active = true;
+    } catch(e) {}
+    // Check obsidian-git plugin
+    try {
+      var gitPluginFolder = this.app.vault.getAbstractFileByPath(".obsidian/plugins/obsidian-git");
+      if (gitPluginFolder) agentsData.gitSync.active = true;
+    } catch(e) {}
+    // ToqanClaw and Gemini are online if the dashboard plugin is running
+    agentsData.toqanClaw.status = "ONLINE";
+    agentsData.gemini.status = "ONLINE";
+    // Collect recent memory logs from memory/ folder
+    // Memory files are outside vault - use a simple approach via vault root
+    var memoryFiles = [];
+    try {
+      var vaultRoot = this.app.vault.adapter.getBasePath();
+      // memory/ is at workspace root, not inside vault
+      // We'll check if memory files exist via a marker approach
+      // For now, mark that CLAW is active (plugin running = CLAW active)
+      agentsData.toqanClaw.lastLog = "Dashboard ativo - CLAW online";
+    } catch(e) {}
+
+return {
       totalNotes: totalNotes,
       totalProjects: totalProjects,
       activeProjects: activeProjects,
       jiraCount: jiraCount,
+      jiraActive: jiraActive,
+      jiraBlocked: jiraBlocked,
       openTasks: openTasks,
       doneTasks: doneTasks,
       learningPending: learningPending,
       learningConsumed: learningConsumed,
       todayMeetings: todayMeetings,
+      modulesCount: modulesCount,
+      projects: projects,
+      jiraCards: jiraCards,
+      meetings: weekMeetings,
+      todayMeetingsList: todayMeetingsList,
+      learning: learning,
+      learningPendingList: learningPendingList,
+      learningConsumedList: learningConsumedList,
+      
+      finopsData: finopsData,
+      agentsData: agentsData,
       timestamp: Date.now()
     };
   }
@@ -1406,14 +1656,28 @@ class PirataDashboardView extends ItemView {
         sandbox: "allow-scripts allow-same-origin"
       }
     });
+    // Listen for open-file messages from the iframe
+    window.addEventListener('message', function(e) {
+      if (e.data && e.data.type === 'open-file') {
+        var filePath = e.data.path;
+        var file = _this.app.vault.getAbstractFileByPath(filePath);
+        if (file) {
+          _this.app.workspace.openLinkText(filePath, '', false);
+        }
+      }
+    });
     iframe.addEventListener('load', function() {
       var stats = _this.collectVaultStats();
+      console.log('[Pirata Dashboard] Sending stats:', stats);
+      console.log('[Pirata Dashboard] Sending stats:', stats);
       iframe.contentWindow.postMessage({ type: 'vault-stats', data: stats }, '*');
     });
     this.refreshInterval = setInterval(function() {
       var stats = _this.collectVaultStats();
       if (iframe.contentWindow) {
-        iframe.contentWindow.postMessage({ type: 'vault-stats', data: stats }, '*');
+        console.log('[Pirata Dashboard] Sending stats:', stats);
+      console.log('[Pirata Dashboard] Sending stats:', stats);
+      iframe.contentWindow.postMessage({ type: 'vault-stats', data: stats }, '*');
       }
     }, 30000);
   }
