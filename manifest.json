@@ -1,0 +1,9 @@
+{"id":"pirata-dashboard",
+ "name":"Pirata Dashboard",
+ "version": "0.2.0",
+ "minAppVersion": "1.5.0",
+ "description": "Command Center do Pirata - dashboard cyberpunk com projetos,!TOPs, FinOps, aprendizaço e mápreticas do vault.",
+ "author": "CLAW",
+ "authorUrl": "https://github.com/amarinhodev",
+ "isDesktopOnly": true
+}
