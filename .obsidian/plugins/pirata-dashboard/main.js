@@ -340,7 +340,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                 
                 <div class="panel flex-1 flex flex-col">
                     <div class="panel-header p-2 px-3 flex items-center gap-2 text-matrix font-mono font-bold text-[10px] tracking-widest uppercase">
-                        <i class="ph-fill ph-caret-down"></i> HOJE: PRIORIDADES & REUNIÕES (DQL)
+                        <i class="ph-fill ph-caret-down"></i> HOJE: PRIORIDADES & REUNIÕES (DQL) <span data-stat="todayMeetings" class="bg-matrix/20 text-matrix border border-matrix/50 px-1.5 rounded text-[9px] ml-1">0</span>
                     </div>
                     <div class="p-3 flex-1 flex flex-col gap-3">
                         <!-- Sub-tabs -->
@@ -554,7 +554,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
                             </div>
                             <div class="flex justify-between items-center bg-[#008F11]/10 border border-jarvis/30 px-2 py-1.5 rounded">
                                 <span class="flex items-center gap-1.5 text-gray-300 font-sans text-[10px]"><i class="ph-fill ph-sparkle text-jarvis text-lg"></i> Gemini</span>
-                                <span id="agents-gemini-status" class="text-matrix font-mono text-[8px]">ONLINE</span>
+                                <span class="text-matrix font-mono text-[8px]">ONLINE</span>
                             </div>
                         </div>
                         <!-- Memory Logs -->
@@ -922,7 +922,7 @@ for (const weight of ["regular", "thin", "light", "bold", "fill", "duotone"]) {
         <!-- ========================================= -->
         <section id="tab-aprendizado" class="tab-content-flex flex-col h-full gap-3 p-2">
             <div class="flex justify-between items-center mb-1">
-                <h2 class="text-matrix font-mono font-bold tracking-widest text-lg flex items-center gap-2"><i class="ph-fill ph-books text-purple-400"></i> RADAR DE APRENDIZADO</h2>
+                <h2 class="text-matrix font-mono font-bold tracking-widest text-lg flex items-center gap-2"><i class="ph-fill ph-books text-purple-400"></i> RADAR DE APRENDIZADO <span data-stat="learningPending" class="bg-purple-500/20 text-purple-400 border border-purple-500/50 px-1.5 rounded text-[9px] ml-1">0</span></h2>
                 <button class="bg-purple-900/30 border border-purple-500/50 text-purple-400 px-3 py-1.5 rounded hover:bg-purple-500 hover:text-white transition font-mono text-[9px] flex items-center gap-2 shadow-[0_0_8px_rgba(168,85,247,0.3)]">
                     <i class="ph-bold ph-plus"></i> Adicionar ao Radar
                 </button>
@@ -1592,15 +1592,28 @@ class PirataDashboardView extends ItemView {
       gitSync: { active: false, lastSync: null },
       memoryLogs: []
     };
-    // Check gcal-obsidian-sync plugin - use getAbstractFileByPath to detect folder
+    // Check gcal-obsidian-sync plugin
     try {
-      var gcalPluginFolder = this.app.vault.getAbstractFileByPath(".obsidian/plugins/gcal-obsidian-sync");
-      if (gcalPluginFolder) agentsData.gcalSync.active = true;
+      var gcalPluginPath = this.app.vault.adapter.getBasePath() + "/.obsidian/plugins/gcal-obsidian-sync";
+      var gcalExists = false;
+      try { this.app.vault.adapter.exists(gcalPluginPath); gcalExists = true; } catch(e) {}
+      if (gcalExists) {
+        agentsData.gcalSync.active = true;
+        // Try to read last sync from plugin data
+        try {
+          var gcalDataPath = this.app.vault.adapter.getBasePath() + "/.obsidian/plugins/gcal-obsidian-sync/data.json";
+          // gcal data is in plugin storage - mark as active
+        } catch(e) {}
+      }
     } catch(e) {}
     // Check obsidian-git plugin
     try {
-      var gitPluginFolder = this.app.vault.getAbstractFileByPath(".obsidian/plugins/obsidian-git");
-      if (gitPluginFolder) agentsData.gitSync.active = true;
+      var gitPluginPath = this.app.vault.adapter.getBasePath() + "/.obsidian/plugins/obsidian-git";
+      var gitExists = false;
+      try { this.app.vault.adapter.exists(gitPluginPath); gitExists = true; } catch(e) {}
+      if (gitExists) {
+        agentsData.gitSync.active = true;
+      }
     } catch(e) {}
     // ToqanClaw and Gemini are online if the dashboard plugin is running
     agentsData.toqanClaw.status = "ONLINE";
